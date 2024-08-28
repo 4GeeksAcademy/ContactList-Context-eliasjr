@@ -12,6 +12,7 @@ const EditContact = () => {
     phone: "",
     address: "",
   });
+  const [saved, setSaved] = useState(false);
 
   useEffect(() => {
     const fetchContact = async () => {
@@ -21,7 +22,6 @@ const EditContact = () => {
         );
         if (!response.ok) throw new Error("Network response was not ok");
         const data = await response.json();
-        // Aquí se asume que data.contact es el objeto con los datos del contacto
         setContact({
           name: data.contact.name || "",
           email: data.contact.email || "",
@@ -39,6 +39,8 @@ const EditContact = () => {
     try {
       const updatedContact = await actions.editContact(id, contact);
       if (updatedContact && updatedContact.id) {
+        setSaved(true);
+        // Navegar a la vista del contacto después de guardar
         navigate(`/single/${updatedContact.id}`);
       } else {
         console.error("El contacto actualizado no tiene ID");
@@ -47,6 +49,24 @@ const EditContact = () => {
       console.error("Error al guardar el contacto:", error);
     }
   };
+
+  if (saved) {
+    return (
+      <div className="container mt-4">
+        <h1 className="text-center mb-4">Contact Updated</h1>
+        <p className="text-center">The contact has been successfully updated.</p>
+        <div className="d-flex justify-content-center">
+          <button
+            type="button"
+            className="btn btn-secondary"
+            onClick={() => navigate("/")}
+          >
+            Back to Contacts
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="container mt-4">

@@ -23,16 +23,14 @@ const ConfirmationModal = ({ isOpen, onConfirm, onCancel }) => {
             <button
               type="button"
               className="btn btn-primary"
-              onClick={onConfirm}
-            >
-              <FontAwesomeIcon icon={faCheck} /> Sí, eliminar
+              onClick={onConfirm}>
+              <FontAwesomeIcon icon={faCheck} />Eliminar
             </button>
-            <button
+            <button 
               type="button"
-              className="btn btn-secondary"
+              className="btn bg-dark text-light"
               onClick={onCancel}
-            >
-              <FontAwesomeIcon icon={faXmark} /> Cancelar
+              ><FontAwesomeIcon icon={faXmark}/>Cancelar 
             </button>
           </div>
         </div>

@@ -11,12 +11,15 @@ const AddNewContact = () => {
     phone: "",
     address: "",
   });
+  const [saved, setSaved] = useState(false);
 
   const handleSave = async () => {
     try {
       const newContact = await actions.newContact(contact);
       if (newContact && newContact.id) {
-        navigate("/");  // Navegar a la lista de contactos después de guardar sin recargar la página
+        setSaved(true);
+        // Navegar a la vista del nuevo contacto después de guardar
+        navigate(`/single/${newContact.id}`);
       } else {
         console.error("El nuevo contacto no tiene ID");
       }
@@ -25,9 +28,23 @@ const AddNewContact = () => {
     }
   };
 
-  const handleBack = () => {
-    navigate("/");  // Navegar a la lista de contactos sin recargar la página
-  };
+  if (saved) {
+    return (
+      <div className="container mt-4">
+        <h1 className="text-center mb-4">Contact Added</h1>
+        <p className="text-center">The new contact has been successfully added.</p>
+        <div className="d-flex justify-content-center">
+          <button
+            type="button"
+            className="btn btn-secondary"
+            onClick={() => navigate("/")}
+          >
+            Back to Contacts
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="container mt-4 mb-5 shadow">
@@ -89,13 +106,12 @@ const AddNewContact = () => {
           type="button"
           className="btn btn-primary my-2 mx-2 shadow"
           onClick={handleSave}
-        >
-          Save contact
+        >Save contact
         </button>
         <button
           type="button"
           className="btn btn-secondary my-2 mx-2 shadow"
-          onClick={handleBack}
+          onClick={() => navigate("/")}
         >
           Back to Contacts
         </button>

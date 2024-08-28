@@ -1,3 +1,41 @@
 /* 
     General Styles
 */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
+body {
+    font-family: "Playfair Display", serif;
+}
+  
+.icon {
+    width: 80px;
+    border-radius: 50%;
+}
+
+.icon:hover {
+  transform: scale(1.1);
+  transition: 0.2s ease-in-out;
+  z-index: 1;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.253);
+}
+
+.modal {
+    color: black;
+    position: fixed; /* Asegura que el modal esté fijo en la pantalla */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+    z-index: 1050; /* Asegura que el modal esté encima de otros elementos */
+  }
+  
+  .modal-dialog {
+    margin: auto;
+  }
+  
+  .modal-content {
+    background: #fff;
+    border-radius: 0.3rem;
+  }
+  
