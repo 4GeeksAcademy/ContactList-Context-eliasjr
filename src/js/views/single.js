@@ -1,26 +1,35 @@
-import React, { useState, useEffect, useContext } from "react";
-import PropTypes from "prop-types";
-import { Link, useParams } from "react-router-dom";
+import React, { useContext } from "react";
+import { useParams, Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 
-export const Single = props => {
-	const { store, actions } = useContext(Context);
-	const params = useParams();
-	return (
-		<div className="jumbotron">
-			<h1 className="display-4">This will show the demo element: {store.demo[params.theid].title}</h1>
+export const Single = () => {
+  const { store } = useContext(Context);
+  const { theid } = useParams();
 
-			<hr className="my-4" />
+  // Encuentra el contacto usando el ID
+  const contact = store.contactList.find(
+    (contact) => contact.id === parseInt(theid)
+  );
 
-			<Link to="/">
-				<span className="btn btn-primary btn-lg" href="#" role="button">
-					Back home
-				</span>
-			</Link>
-		</div>
-	);
-};
+  if (!contact) {
+    return <h1>Contact not found</h1>;
+  }
 
-Single.propTypes = {
-	match: PropTypes.object
+  return (
+    <div className="container mt-5">
+      <h1>{contact.name}</h1>
+      <p>
+        <strong>Email:</strong> {contact.email}
+      </p>
+      <p>
+        <strong>Phone:</strong> {contact.phone}
+      </p>
+      <p>
+        <strong>Address:</strong> {contact.address}
+      </p>
+      <Link to="/">
+        <button className="btn btn-primary">Back to Contacts</button>
+      </Link>
+    </div>
+  );
 };
