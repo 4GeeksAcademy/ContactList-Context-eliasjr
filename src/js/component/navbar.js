@@ -4,11 +4,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 export const Navbar = () => (
-  <nav className="d-flex justify-content-evenly navbar navbar-expand-lg text-light bg-dark mb-3">
+  <nav className="navbar navbar-expand-lg text-light bg-dark mb-3 shadow">
     <Link to="/" className="navbar-brand">
-      <button type="button" className="btn bg-dark text-light">
-        <h1>Contact List with React & Fetch</h1>
-      </button>
+      <h1>Contact List with React & Fetch</h1>
     </Link>
     <div className="ml-auto">
       <Link to="/new-contact">

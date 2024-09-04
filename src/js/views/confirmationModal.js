@@ -1,6 +1,6 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faXmark, faCheck } from "@fortawesome/free-solid-svg-icons"; // Actualizado el icono de cerrar
+import { faXmark, faCheck } from "@fortawesome/free-solid-svg-icons"; 
 
 const ConfirmationModal = ({ isOpen, onConfirm, onCancel }) => {
   if (!isOpen) return null;
@@ -12,7 +12,6 @@ const ConfirmationModal = ({ isOpen, onConfirm, onCancel }) => {
           <div className="modal-header">
             <h5 className="modal-title">¿Deseas eliminar el contacto?</h5>
             <button type="button" className="btn-close" onClick={onCancel}>
-              {/* Actualizado a icono moderno de cierre */}
               <FontAwesomeIcon icon={faXmark} />
             </button>
           </div>
@@ -23,14 +22,16 @@ const ConfirmationModal = ({ isOpen, onConfirm, onCancel }) => {
             <button
               type="button"
               className="btn btn-primary"
-              onClick={onConfirm}>
-              <FontAwesomeIcon icon={faCheck} />Eliminar
+              onClick={onConfirm}
+            >
+              <FontAwesomeIcon icon={faCheck} /> Eliminar
             </button>
             <button 
               type="button"
               className="btn bg-dark text-light"
               onClick={onCancel}
-              ><FontAwesomeIcon icon={faXmark}/>Cancelar 
+            >
+              <FontAwesomeIcon icon={faXmark}/> Cancelar 
             </button>
           </div>
         </div>

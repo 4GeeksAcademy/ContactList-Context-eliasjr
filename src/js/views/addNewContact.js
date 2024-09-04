@@ -14,17 +14,20 @@ const AddNewContact = () => {
   const [saved, setSaved] = useState(false);
 
   const handleSave = async () => {
+    if (!contact.name || !contact.email || !contact.phone || !contact.address) {
+      alert("All fields are required.");
+      return;
+    }
     try {
       const newContact = await actions.newContact(contact);
       if (newContact && newContact.id) {
         setSaved(true);
-        // Navegar a la vista del nuevo contacto después de guardar
         navigate(`/single/${newContact.id}`);
       } else {
-        console.error("El nuevo contacto no tiene ID");
+        console.error("The new contact has no ID");
       }
     } catch (error) {
-      console.error("Error al guardar el contacto:", error);
+      console.error("Error saving contact:", error);
     }
   };
 
@@ -106,7 +109,8 @@ const AddNewContact = () => {
           type="button"
           className="btn btn-primary my-2 mx-2 shadow"
           onClick={handleSave}
-        >Save contact
+        >
+          Save contact
         </button>
         <button
           type="button"

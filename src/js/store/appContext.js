@@ -5,21 +5,24 @@ export const Context = React.createContext(null);
 
 const injectContext = (PassedComponent) => {
   const StoreWrapper = (props) => {
-    const [state, setState] = useState(
-      getState({
-        getStore: () => state.store,
-        getActions: () => state.actions,
+    const [state, setState] = useState(() => {
+      const initialState = getState({
+        getStore: () => state?.store,
+        getActions: () => state?.actions,
         setStore: (updatedStore) =>
           setState((prevState) => ({
             store: { ...prevState.store, ...updatedStore },
             actions: { ...prevState.actions },
           })),
-      })
-    );
+      });
+      return initialState;
+    });
 
     useEffect(() => {
-      state.actions.loadContacts();
-    }, [state.actions]);
+      if (state?.actions?.loadContacts) {
+        state.actions.loadContacts();
+      }
+    }, [state?.actions]);
 
     return (
       <Context.Provider value={state}>
